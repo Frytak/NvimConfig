@@ -4,4 +4,7 @@ return {
 		{'hrsh7th/cmp-nvim-lsp'},
 		{'hrsh7th/nvim-cmp'},
 		{'L3MON4D3/LuaSnip'},
+		config = function ()
+				require("lsp-zero").setup()
+		end,
 }
