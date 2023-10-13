@@ -47,8 +47,5 @@ vim.cmd("colorscheme tokyonight")
 -- Keymaps
 require('keymaps')
 
--- Lsp setup with mason
+-- LSP setup
 require('lsp')
-
-
-

@@ -7,17 +7,9 @@ require('mason-lspconfig').setup({
         'rust_analyzer',
         'cssls',
         'cssmodules_ls',
+        'tsserver',
     },
-
     handlers = {
         lsp_zero.default_setup,
-        rust_analyzer = function()
-            require('lspconfig').rust_analyzer.setup({
-                single_file_support = false,
-                on_attach = function(client, bufnr)
-                    print('Hello Rust!')
-                end
-            })
-        end,
-    }
+    },
 })

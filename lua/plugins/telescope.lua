@@ -3,6 +3,13 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         require('telescope').setup({
+            defaults = {
+                file_ignore_patterns = {
+                    'node_modules',
+                    '.git',
+                    'target'
+                }
+            },
             pickers = {
                 find_files = {
                     mappings = {

@@ -25,6 +25,9 @@ vim.keymap.set('v', '<Leader>P', '"+P')
 vim.keymap.set('n', '<Leader>y', '"+yy')
 vim.keymap.set('v', '<Leader>y', '"+y')
 
+-- Exit Terminal mode
+vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
+
 
 
 -- Navigation (netrw)
@@ -46,6 +49,24 @@ vim.keymap.set('v', '<Leader>y', '"+y')
 
     -- telescope specific keymaps
     -- defined in the telescope.lua as I could not get them working here
+
+-- Navigation (tabs)
+    -- Switch Left/Right tab
+    vim.keymap.set('n', '<Leader>h', '<cmd> tabprevious<Enter>')
+    vim.keymap.set('n', '<Leader>l', '<cmd> tabnext<Enter>')
+
+    -- Go to specified tab or create a new one
+    vim.keymap.set('n', '<Leader>n', function()
+        local count = vim.v.count
+        if (count == 0) then
+            vim.cmd(':tabnew')
+        else
+            vim.cmd(string.format(':%stabnext', count))
+        end
+    end)
+
+    -- Close tab
+    vim.keymap.set('n', '<Leader>x', '<cmd> tabclose<Enter>')
 
 
 
