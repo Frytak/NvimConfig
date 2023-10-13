@@ -1,6 +1,17 @@
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 
+--- Helper function binding keymaps only for a specific buffer
+---
+--- @param pattern string Buffer name
+--- @param callback function Function to call on buffer
+function buffer_bind(pattern, callback)
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = pattern,
+        callback = callback,
+    })
+end
+
 -- ====================
 -- Standard Vim keymaps
 -- ====================
@@ -21,24 +32,20 @@ vim.keymap.set('v', '<Leader>y', '"+y')
     vim.keymap.set('n', '<Leader><Leader>', ':Explore<Enter>')
 
     -- netrw specific keymaps
-    vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'netrw',
-        callback = function()
-            local bind = function(lhs, rhs)
-                vim.keymap.set('n', lhs, rhs, {remap = true, buffer = true})
-            end
+    buffer_bind('netrw', function()
+        -- Go out of directory
+        vim.keymap.set('n', 'h', '-', {remap = true, buffer = true})
 
-            -- Go out of directory
-            bind('h', '-')
-
-            -- Go into directory
-            bind('l', '<Enter>')
-        end
-    })
+        -- Go into directory
+        vim.keymap.set('n', 'l', '<Enter>', {remap = true, buffer = true})
+    end)
 
 -- Navigation (telescope)
     -- Find files
-    vim.keymap.set('n', '<Leader>f', '<cmd>lua require(\'telescope.builtin\').find_files()<Enter>')
+    vim.keymap.set('n', '<Leader>f', function() require('telescope.builtin').find_files() end)
+
+    -- telescope specific keymaps
+    -- defined in the telescope.lua as I could not get them working here
 
 
 
