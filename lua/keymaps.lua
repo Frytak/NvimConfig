@@ -1,3 +1,4 @@
+local vim = _G.vim
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 
@@ -5,7 +6,7 @@ local cmp = require('cmp')
 ---
 --- @param pattern string Buffer name
 --- @param callback function Function to call on buffer
-function buffer_bind(pattern, callback)
+local function buffer_bind(pattern, callback)
     vim.api.nvim_create_autocmd('FileType', {
         pattern = pattern,
         callback = callback,
@@ -32,7 +33,7 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
 
 -- Navigation (netrw)
     -- Open netrw
-    vim.keymap.set('n', '<Leader><Leader>', ':Explore<Enter>')
+    vim.keymap.set('n', '<Leader><Leader>', function() vim.cmd('Explore') end)
 
     -- netrw specific keymaps
     buffer_bind('netrw', function()
@@ -43,17 +44,13 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
         vim.keymap.set('n', 'l', '<Enter>', {remap = true, buffer = true})
     end)
 
--- Navigation (telescope)
-    -- Find files
-    vim.keymap.set('n', '<Leader>f', function() require('telescope.builtin').find_files() end)
-
-    -- telescope specific keymaps
-    -- defined in the telescope.lua as I could not get them working here
+-- Navigation (fzf)
+    vim.keymap.set('n', '<Leader>f', function() vim.cmd('FZF') end)
 
 -- Navigation (tabs)
     -- Switch Left/Right tab
-    vim.keymap.set('n', '<Leader>h', '<cmd> tabprevious<Enter>')
-    vim.keymap.set('n', '<Leader>l', '<cmd> tabnext<Enter>')
+    vim.keymap.set('n', '<Leader>h', function() vim.cmd('tabprevious') end)
+    vim.keymap.set('n', '<Leader>l', function() vim.cmd('tabnext') end)
 
     -- Go to specified tab or create a new one
     vim.keymap.set('n', '<Leader>n', function()
@@ -65,8 +62,31 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
         end
     end)
 
-    -- Close tab
-    vim.keymap.set('n', '<Leader>x', '<cmd> tabclose<Enter>')
+    -- Move tab
+    vim.keymap.set('n', '<Leader><S-h>', function() vim.cmd('-tabmove') end)
+    vim.keymap.set('n', '<Leader><S-l>', function() vim.cmd('+tabmove') end)
+    vim.keymap.set('n', '<Leader>m', function()
+        local count = vim.v.count
+        if (count == 1) then count = 0 end
+        vim.cmd(string.format(':%stabmove', count))
+    end)
+
+    -- Close current tab
+    vim.keymap.set('n', '<Leader>x', function() vim.cmd('tabclose') end)
+
+    -- Close all tabs
+    vim.keymap.set('n', '<Leader><S-x>', function()
+        vim.ui.input({ prompt = 'Are you sure you want to close all the tabs except the current one? (Y/n): ' }, function(input)
+            if (input == 'Y') then
+                vim.print('Tabs closed.')
+                vim.cmd('tabonly')
+            elseif (input == 'n') then
+                vim.print('No tabs closed.')
+            else
+                vim.print('Inccorect input. No tabs closed.')
+            end
+        end)
+    end)
 
 
 

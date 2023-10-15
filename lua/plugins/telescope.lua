@@ -7,7 +7,8 @@ return {
                 file_ignore_patterns = {
                     'node_modules',
                     '.git',
-                    'target'
+                    'target',
+                    'protoc-23.2',
                 }
             },
             pickers = {
