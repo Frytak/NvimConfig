@@ -32,12 +32,14 @@ return {
             --- function will be called with a ColorScheme table
             ---@param colors ColorScheme
             on_colors = function(colors)
-                colors.bg = '#191919'
+                colors.bg = '#222222'
                 colors.comment = '#666666'
 
                 -- Status line
                 colors.bg_statusline = '#111111'
-                colors.fg_sidebar = '#ff0000'
+
+                -- Sidebars
+                -- colors.fg_sidebar = '#ff0000'
             end,
 
             --- You can override specific highlights to use other groups or a hex color

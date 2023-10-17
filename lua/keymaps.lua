@@ -88,6 +88,16 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
         end)
     end)
 
+-- Navigation (windows)
+    -- Change to vertical split
+    vim.keymap.set('n', '<Leader>wv', '<C-w>t<C-w>K')
+
+    -- Change to horizontal split
+    vim.keymap.set('n', '<Leader>wh', '<C-w>t<C-w>H')
+
+    -- Switch window
+    vim.keymap.set('n', '<Leader>ww', '<C-w><C-w>')
+
 
 
 -- ============
