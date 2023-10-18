@@ -1,6 +1,7 @@
 local vim = _G.vim
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
+local wdirs = require('workingdirs')
 
 --- Helper function binding keymaps only for a specific buffer
 ---
@@ -42,10 +43,22 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
 
         -- Go into directory
         vim.keymap.set('n', 'l', '<Enter>', {remap = true, buffer = true})
+
+        -- Go into directory and make it the working one
+        vim.keymap.set('n', '<S-l>', function()
+            local path = wdirs.getSelectedDirectory()
+            wdirs.changeCurrentWorkingDirectory(path)
+            wdirs.openNetrwCurrentWorkingDirectory(path)
+        end, {remap = true, buffer = true})
     end)
 
 -- Navigation (fzf)
     vim.keymap.set('n', '<Leader>f', function() vim.cmd('FZF') end)
+
+    buffer_bind('fzf', function()
+        -- Bind <Esc> to exit
+        vim.keymap.set('t', '<Esc>', '<cmd>q<Enter>', {remap = true, buffer = true})
+    end)
 
 -- Navigation (tabs)
     -- Switch Left/Right tab
@@ -97,6 +110,9 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
 
     -- Switch window
     vim.keymap.set('n', '<Leader>ww', '<C-w><C-w>')
+
+-- Navigation (custom)
+    vim.keymap.set('n', '<Leader>d', function() wdirs.prettyChangeDirectory() end)
 
 
 
