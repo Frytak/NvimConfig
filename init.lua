@@ -44,6 +44,17 @@ require("lazy").setup("plugins")
 -- Set colorshceme
 vim.cmd("colorscheme tokyonight")
 
+local cmp = require('cmp')
+cmp.setup({
+    formatting = {
+      format = function(entry, vim_item)
+        vim_item.abbr = string.sub(vim_item.abbr, 1, 40)
+        vim_item.menu = nil
+        return vim_item
+      end
+    }
+})
+
 -- Keymaps
 require('keymaps')
 

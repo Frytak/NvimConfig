@@ -2,8 +2,8 @@ local M = {}
 
 --- This list assumes that all the directories start from the windows user folder
 M.directoryList = {
-    { name = "Nvim config", path = "AppData\\Local\\nvim" },
-    { name = "Programming projects", path = "Pulpit\\~\\Important\\Programming Projects" },
+    { name = "Nvim config", path = "C:\\Users\\fryta\\AppData\\Local\\nvim" },
+    { name = "Programming projects", path = "C:\\Users\\fryta\\Pulpit\\~\\Important\\Programming Projects" },
 };
 
 --- @return string
@@ -35,39 +35,39 @@ M.getSelectedDirectory = function()
     return path
 end
 
+--- @return string
+M.getPreviousDirectory = function()
+    -- Get the current directory in netrw
+    local path = vim.b.netrw_curdir
+    -- Change all '\' to '/' for consistency
+    path = string.gsub(path, '\\', '/')
+    -- Delete the last '/%'
+    local subLen = string.len(string.match(path, '/(%w+)$'))
+    path = string.sub(path, 1, string.len(path) - subLen)
+
+    return path
+end
+
 --- @param path string
 M.changeCurrentWorkingDirectory = function(path)
     vim.loop.chdir(path)
 end
 
---- @param path string
 M.openNetrwCurrentWorkingDirectory = function()
     vim.cmd(string.format(':Ntree %s', M.getCurrentWorkingDirectory()))
 end
 
-M.getUserDirectory = function()
-    -- Open a file in read mode
-    local file, err = io.open("userdir.txt", "r")
-
-    print(file)
-    -- Check if the file exists
-    if not file then
-        error(err)
-        return
-    end
-
-    -- Read the first line of the file
-    local first_line = file:read("*l")
-    print("The first line is: " .. first_line)
-
-    -- Close the file
-    file:close()
+--- @param path string
+M.openNetrwDirectory = function(path)
+    vim.cmd(string.format(':Ntree %s', path))
 end
 
 --- Shows the list of available directories and opens the chosen one using netrw
-M.prettyChangeDirectory = function()
+--- @param working boolean
+M.prettyChangeDirectory = function(working)
     local formattedDirList = '';
     local intInput;
+    local path;
 
     -- Print the list of the available directories
     for i, v in ipairs(M.directoryList) do
@@ -81,13 +81,19 @@ M.prettyChangeDirectory = function()
             print('Invalid input. Must be a number!')
             return
         end
-        local path = M.directoryList[intInput].path
-
-        M.changeCurrentWorkingDirectory(path)
+        path = M.directoryList[intInput].path
     end)
+
+    -- If invalid input, return
     if (intInput == nil) then return end
 
-    M.openNetrwCurrentWorkingDirectory()
+    -- Whether to change working directory
+    if (working) then
+        M.changeCurrentWorkingDirectory(path)
+    end
+
+    -- Open directory
+    M.openNetrwDirectory(path)
 end
 
 return M

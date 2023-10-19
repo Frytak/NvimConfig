@@ -1,6 +1,7 @@
 local vim = _G.vim
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
+local rest = require('rest-nvim')
 local wdirs = require('workingdirs')
 
 --- Helper function binding keymaps only for a specific buffer
@@ -48,8 +49,20 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
         vim.keymap.set('n', '<S-l>', function()
             local path = wdirs.getSelectedDirectory()
             wdirs.changeCurrentWorkingDirectory(path)
-            wdirs.openNetrwCurrentWorkingDirectory(path)
-            wdirs.getUserDirectory()
+            wdirs.openNetrwCurrentWorkingDirectory()
+        end, {remap = true, buffer = true})
+
+        -- Go up one directory and make it the working one
+        vim.keymap.set('n', '<S-h>', function()
+            local path = wdirs.getPreviousDirectory()
+            wdirs.changeCurrentWorkingDirectory(path)
+            wdirs.openNetrwCurrentWorkingDirectory()
+        end, {remap = true, buffer = true})
+
+        -- Make the current directory the working one
+        vim.keymap.set('n', '<S-k>', function()
+            local path = wdirs.getCurrentDirectory()
+            wdirs.changeCurrentWorkingDirectory(path)
         end, {remap = true, buffer = true})
     end)
 
@@ -129,6 +142,14 @@ lsp_zero.on_attach(function(client, bufnr)
             ['<C-h>'] = cmp.mapping.abort(),
             ['<C-k>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
             ['<C-j>'] = cmp.mapping.select_next_item({behavior = 'select'}),
+            ['<S-<C-j>>'] = cmp.mapping.scroll_docs(1),
         })
     })
 end)
+
+
+
+-- ====
+-- Rest
+-- ====
+vim.keymap.set('n', '<Leader>r', function() rest.run() end)

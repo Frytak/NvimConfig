@@ -8,6 +8,8 @@ require('mason-lspconfig').setup({
         'cssls',
         'cssmodules_ls',
         'tsserver',
+        'html',
+        'jsonls',
     },
     handlers = {
         lsp_zero.default_setup,
