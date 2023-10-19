@@ -1,3 +1,5 @@
+local colorado = require('../colorscheme')
+
 return {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -32,8 +34,8 @@ return {
             --- function will be called with a ColorScheme table
             ---@param colors ColorScheme
             on_colors = function(colors)
-                colors.bg = '#222222'
-                colors.comment = '#666666'
+                colors.bg = colorado.bg.depth1
+                colors.comment = colorado.fg.comment
 
                 -- Status line
                 colors.bg_statusline = '#111111'

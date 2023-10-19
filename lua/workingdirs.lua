@@ -1,8 +1,9 @@
 local M = {}
 
+--- This list assumes that all the directories start from the windows user folder
 M.directoryList = {
-    { name = "Nvim config", path = "C:\\Users\\fryta\\AppData\\Local\\nvim" },
-    { name = "Programming projects", path = "C:\\Users\\fryta\\Pulpit\\~\\Important\\Programming Projects" },
+    { name = "Nvim config", path = "AppData\\Local\\nvim" },
+    { name = "Programming projects", path = "Pulpit\\~\\Important\\Programming Projects" },
 };
 
 --- @return string
@@ -44,10 +45,29 @@ M.openNetrwCurrentWorkingDirectory = function()
     vim.cmd(string.format(':Ntree %s', M.getCurrentWorkingDirectory()))
 end
 
+M.getUserDirectory = function()
+    -- Open a file in read mode
+    local file, err = io.open("userdir.txt", "r")
+
+    print(file)
+    -- Check if the file exists
+    if not file then
+        error(err)
+        return
+    end
+
+    -- Read the first line of the file
+    local first_line = file:read("*l")
+    print("The first line is: " .. first_line)
+
+    -- Close the file
+    file:close()
+end
+
 --- Shows the list of available directories and opens the chosen one using netrw
 M.prettyChangeDirectory = function()
     local formattedDirList = '';
-    local intInput = 0;
+    local intInput;
 
     -- Print the list of the available directories
     for i, v in ipairs(M.directoryList) do

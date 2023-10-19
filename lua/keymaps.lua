@@ -49,11 +49,12 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
             local path = wdirs.getSelectedDirectory()
             wdirs.changeCurrentWorkingDirectory(path)
             wdirs.openNetrwCurrentWorkingDirectory(path)
+            wdirs.getUserDirectory()
         end, {remap = true, buffer = true})
     end)
 
 -- Navigation (fzf)
-    vim.keymap.set('n', '<Leader>f', function() vim.cmd('FZF') end)
+vim.keymap.set('n', '<Leader>f', function() vim.cmd('FZF') end)
 
     buffer_bind('fzf', function()
         -- Bind <Esc> to exit
