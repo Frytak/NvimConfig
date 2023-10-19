@@ -142,7 +142,8 @@ lsp_zero.on_attach(function(client, bufnr)
             ['<C-h>'] = cmp.mapping.abort(),
             ['<C-k>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
             ['<C-j>'] = cmp.mapping.select_next_item({behavior = 'select'}),
-            ['<S-<C-j>>'] = cmp.mapping.scroll_docs(1),
+            ['<S-C-j>'] = cmp.mapping.scroll_docs(1),
+            ['<S-C-k>'] = cmp.mapping.scroll_docs(-1),
         })
     })
 end)

@@ -1,10 +1,6 @@
-local M = {}
+local directoryList = require('dirslist')
 
---- This list assumes that all the directories start from the windows user folder
-M.directoryList = {
-    { name = "Nvim config", path = "C:\\Users\\fryta\\AppData\\Local\\nvim" },
-    { name = "Programming projects", path = "C:\\Users\\fryta\\Pulpit\\~\\Important\\Programming Projects" },
-};
+local M = {}
 
 --- @return string
 M.getCurrentWorkingDirectory = function()
@@ -63,34 +59,35 @@ M.openNetrwDirectory = function(path)
 end
 
 --- Shows the list of available directories and opens the chosen one using netrw
---- @param working boolean
-M.prettyChangeDirectory = function(working)
-    local formattedDirList = '';
-    local intInput;
-    local path;
+M.prettyChangeDirectory = function()
+    local formattedDirList = ''
+    local intInput
+    local path
 
     -- Print the list of the available directories
-    for i, v in ipairs(M.directoryList) do
+    for i, v in ipairs(directoryList) do
         formattedDirList = formattedDirList .. string.format('  %i: %s\n', i, v.name)
     end
 
-    -- Take the input
+    -- Take the directory input
     vim.ui.input({ prompt = string.format('%sChoose from the available directories: ', formattedDirList) }, function(input)
         intInput = tonumber(input);
         if (intInput == nil) then
             print('Invalid input. Must be a number!')
             return
         end
-        path = M.directoryList[intInput].path
+        path = directoryList[intInput].path
     end)
 
-    -- If invalid input, return
-    if (intInput == nil) then return end
+    -- Whether to change the working directory
+    vim.ui.input({ prompt = 'Whether to change to working directory (y/N): ' }, function(input)
+        if not (input == 'N') then
+            M.changeCurrentWorkingDirectory(path)
+        end
+    end)
 
-    -- Whether to change working directory
-    if (working) then
-        M.changeCurrentWorkingDirectory(path)
-    end
+    -- If invalid directory input, return
+    if (intInput == nil) then return end
 
     -- Open directory
     M.openNetrwDirectory(path)

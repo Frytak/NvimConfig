@@ -10,7 +10,7 @@ return {
       -- Skip SSL verification, useful for unknown certificates
       skip_ssl_verification = false,
       -- Encode URL before making request
-      encode_url = true,
+      encode_url = false,
       -- Highlight request on run
       highlight = {
         enabled = true,
@@ -37,7 +37,7 @@ return {
       jump_to_request = false,
       env_file = '.env',
       custom_dynamic_variables = {},
-      yank_dry_run = true,
+      yank_dry_run = false,
     })
   end
 }
