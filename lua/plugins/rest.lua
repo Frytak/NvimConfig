@@ -6,7 +6,7 @@ return {
       -- Open request results in a horizontal split
       result_split_horizontal = false,
       -- Keep the http file buffer above|left when split horizontal|vertical
-      result_split_in_place = false,
+      result_split_in_place = true,
       -- Skip SSL verification, useful for unknown certificates
       skip_ssl_verification = false,
       -- Encode URL before making request
@@ -21,7 +21,7 @@ return {
         show_url = true,
         -- show the generated curl command in case you want to launch
         -- the same request via the terminal (can be verbose)
-        show_curl_command = false,
+        show_curl_command = true,
         show_http_info = true,
         show_headers = true,
         -- executables or functions for formatting response body [optional]

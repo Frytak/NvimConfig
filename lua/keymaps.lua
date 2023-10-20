@@ -120,10 +120,20 @@ vim.keymap.set('n', '<Leader>f', function() vim.cmd('FZF') end)
     vim.keymap.set('n', '<Leader>wv', '<C-w>t<C-w>K')
 
     -- Change to horizontal split
-    vim.keymap.set('n', '<Leader>wh', '<C-w>t<C-w>H')
+    vim.keymap.set('n', '<Leader>wb', '<C-w>t<C-w>H')
 
     -- Switch window
     vim.keymap.set('n', '<Leader>ww', '<C-w><C-w>')
+    vim.keymap.set('n', '<Leader>wh', '<C-w><C-h>')
+    vim.keymap.set('n', '<Leader>wl', '<C-w><C-l>')
+    vim.keymap.set('n', '<Leader>wk', '<C-w><C-k>')
+    vim.keymap.set('n', '<Leader>wj', '<C-w><C-j>')
+
+    -- Resize
+    vim.keymap.set('n', '<Leader>w<S-h>', '<C-w><')
+    vim.keymap.set('n', '<Leader>w<S-l>', '<C-w>>')
+    vim.keymap.set('n', '<Leader>w<S-k>', '<C-w>-')
+    vim.keymap.set('n', '<Leader>w<S-j>', '<C-w>+')
 
 -- Navigation (custom)
     vim.keymap.set('n', '<Leader>d', function() wdirs.prettyChangeDirectory() end)
