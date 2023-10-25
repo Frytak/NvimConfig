@@ -1,3 +1,3 @@
 return {
-    'BlackLight/nvim-http'
+    'BlackLight/nvim-http',
 }
