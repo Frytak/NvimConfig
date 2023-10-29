@@ -31,6 +31,17 @@ vim.keymap.set('v', '<Leader>y', '"+y')
 -- Exit Terminal mode
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
 
+-- Switch between normal and relative line numbers
+vim.keymap.set('n', '<Leader>ls', function() vim.wo.relativenumber = (not vim.wo.relativenumber) end)
+vim.keymap.set('n', '<Leader>lr', function() vim.wo.relativenumber = true end)
+vim.keymap.set('n', '<Leader>ln', function() vim.wo.relativenumber = false end)
+
+
+
+
+-- LSP
+vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnostics() end)
+
 
 
 -- Navigation (netrw)

@@ -34,14 +34,14 @@ return {
             --- function will be called with a ColorScheme table
             ---@param colors ColorScheme
             on_colors = function(colors)
-                colors.bg = colorado.bg.depth1
+                colors.bg = colorado.bg.depth2
                 colors.comment = colorado.fg.comment
 
                 -- Status line
-                colors.bg_statusline = '#111111'
+                colors.bg_statusline = colorado.bg.depth1
 
                 -- Sidebars
-                -- colors.fg_sidebar = '#ff0000'
+                colors.bg_sidebar = colorado.bg.depth1
             end,
 
             --- You can override specific highlights to use other groups or a hex color
