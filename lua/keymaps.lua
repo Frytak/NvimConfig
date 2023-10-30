@@ -1,4 +1,3 @@
-local vim = _G.vim
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 local rest = require('rest-nvim')
@@ -14,6 +13,11 @@ local function buffer_bind(pattern, callback)
         callback = callback,
     })
 end
+
+-- TESTS
+vim.keymap.set('n', '<Leader>t', function()
+    print("Current netrw directory: " .. wdirs.getCurrentNetrwDirectory())
+end)
 
 -- ====================
 -- Standard Vim keymaps
@@ -78,44 +82,14 @@ vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnos
     end)
 
 -- Navigation (fzf)
-vim.keymap.set('n', '<Leader>f', function()
-    -- Create a new empty buffer
-    local buf = vim.api.nvim_create_buf(false, true)
-
-    -- Get the current window dimensions
-    local width = vim.api.nvim_get_option("columns")
-    local height = vim.api.nvim_get_option("lines")
-
-    -- Calculate the floating window size and position
-    local win_width = math.ceil(width * 0.8)
-    local win_height = math.ceil(height * 0.8)
-    local row = math.ceil((height - win_height) / 2)
-    local col = math.ceil((width - win_width) / 2)
-
-    -- Set some options for the floating window
-    local opts = {
-      relative = "editor",
-      width = win_width,
-      height = win_height,
-      row = row,
-      col = col,
-      style = "minimal"
-    }
-
-    -- Create a new floating window
-    local win = vim.api.nvim_open_win(buf, true, opts)
-
-    -- Start a terminal job in the buffer
-    local job_id = vim.api.nvim_open_term(buf, {})
-
-    -- Send the shell command to the terminal job
-    vim.api.nvim_chan_send(job_id, "ls\n")
-end)
--- bat --color=always --style=grid init.lua
+vim.keymap.set('n', '<Leader>f', '<cmd>FZF<Enter>')
 
     buffer_bind('fzf', function()
         -- Bind <Esc> to exit
-        vim.keymap.set('t', '<Esc>', '<cmd>q<Enter>', {remap = true, buffer = true})
+        vim.keymap.set('t', '<Esc>', function()
+            local ctrlc = vim.api.nvim_replace_termcodes('<C-c>', true, false, true)
+            vim.api.nvim_feedkeys(ctrlc, 't', false)
+        end, {remap = true, buffer = true})
     end)
 
 -- Navigation (tabs)

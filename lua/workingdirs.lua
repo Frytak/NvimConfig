@@ -1,65 +1,100 @@
 local directoryList = require('dirslist')
 
-local M = {}
+--- Various utilities for working with directories (supports netrw).
+local WorkingDirs = {}
 
---- @return string
-M.getCurrentWorkingDirectory = function()
+--- Get the current working directory
+---
+--- @return string path
+WorkingDirs.getCurrentWorkingDirectory = function()
     return vim.fn.getcwd()
 end
 
-M.getCurrentDirectory = function()
-    -- Get the current directory in netrw
-    local path = vim.b.netrw_curdir
-    -- Concatenate them to get the full path
-    -- Change all '\' to '/' for consistency
-    path = string.gsub(path, '\\', '/')
-
-    return path
-end
-
---- @return string
-M.getSelectedDirectory = function()
+--- Gets the current directory.
+---
+--- If the user is not in netrw or current directory of netrw is
+--- nil for some other reason the function will return nil.
+---
+--- @return string|nil path
+WorkingDirs.getCurrentNetrwDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
+    if (dir) then return nil end
+
+    -- Change all '\' to '/' for consistency
+    dir = string.gsub(dir, '\\', '/')
+
+    return dir
+end
+
+--- Get the current directory under the cursor.
+--- 
+--- If the user is not in netrw, current directory of netrw is
+--- nil for some other reason or the file under the cursor is
+--- incorrect/nil the function will return nil.
+---
+--- @return string|nil path
+WorkingDirs.getSelectedDirectory = function()
+    -- Get the current directory in netrw
+    local dir = vim.b.netrw_curdir
+    if (dir) then return nil end
+
     -- Get the file name under the cursor
     local file = vim.fn.expand('<cfile>')
+    if (file) then return nil end
+
     -- Concatenate them to get the full path
-    local path = dir .. '/' .. file
-    -- Change all '\' to '/' for consistency
-    path = string.gsub(path, '\\', '/')
+    dir = dir .. '/' .. file
 
-    return path
+    -- Change all '\' to '/' for consistency
+    dir = string.gsub(dir, '\\', '/')
+
+    return dir
 end
 
---- @return string
-M.getPreviousDirectory = function()
+--- Get the previous directory.
+---
+--- If the user is not in netrw or current directory of netrw is
+--- nil for some other reason the function will return nil.
+---
+--- @return string|nil path
+WorkingDirs.getPreviousDirectory = function()
     -- Get the current directory in netrw
-    local path = vim.b.netrw_curdir
+    local dir = vim.b.netrw_curdir
+    if (dir) then return nil end
+
     -- Change all '\' to '/' for consistency
-    path = string.gsub(path, '\\', '/')
+    dir = string.gsub(dir, '\\', '/')
+
     -- Delete the last '/%'
-    local subLen = string.len(string.match(path, '/(%w+)$'))
-    path = string.sub(path, 1, string.len(path) - subLen)
+    dir = string.sub(dir, 1, string.len(dir) - string.len(string.match(dir, '/(%w+)$')))
 
-    return path
+    return dir
 end
 
+--- Changes the current working directory to `path`.
+---
 --- @param path string
-M.changeCurrentWorkingDirectory = function(path)
-    vim.loop.chdir(path)
+--- @return boolean success
+WorkingDirs.changeCurrentWorkingDirectory = function(path)
+     local success = pcall(vim.loop.chdir, path)
+     return success
 end
 
-M.openNetrwCurrentWorkingDirectory = function()
-    vim.cmd(string.format(':Ntree %s', M.getCurrentWorkingDirectory()))
+--- Opens netrw in the current working directory.
+WorkingDirs.openNetrwCurrentWorkingDirectory = function()
+    vim.cmd(string.format(':Ntree %s', WorkingDirs.getCurrentWorkingDirectory()))
 end
 
+--- Opens the specified directory using netrw.
 --- @param path string
-M.openNetrwDirectory = function(path)
+WorkingDirs.openNetrwDirectory = function(path)
     vim.cmd(string.format(':Ntree %s', path))
 end
 
+-- TODO: Add path parameter
 --- Shows the list of available directories and opens the chosen one using netrw
-M.prettyChangeDirectory = function()
+WorkingDirs.prettyChangeDirectory = function()
     local formattedDirList = ''
     local intInput
     local path
@@ -72,25 +107,25 @@ M.prettyChangeDirectory = function()
     -- Take the directory input
     vim.ui.input({ prompt = string.format('%sChoose from the available directories: ', formattedDirList) }, function(input)
         intInput = tonumber(input);
-        if (intInput == nil) then
-            print('Invalid input. Must be a number!')
-            return
-        end
-        path = directoryList[intInput].path
-    end)
 
-    -- Whether to change the working directory
-    vim.ui.input({ prompt = 'Whether to change to working directory (y/N): ' }, function(input)
-        if not (input == 'N') then
-            M.changeCurrentWorkingDirectory(path)
-        end
+        -- If invalid directory input, return
+        if (intInput == nil) then return end
+
+        path = directoryList[intInput].path
     end)
 
     -- If invalid directory input, return
     if (intInput == nil) then return end
 
+    -- Whether to change the working directory
+    vim.ui.input({ prompt = 'Whether to change to working directory (y/N): ' }, function(input)
+        if not (input == 'N') then
+            WorkingDirs.changeCurrentWorkingDirectory(path)
+        end
+    end)
+
     -- Open directory
-    M.openNetrwDirectory(path)
+    WorkingDirs.openNetrwDirectory(path)
 end
 
-return M
+return WorkingDirs
