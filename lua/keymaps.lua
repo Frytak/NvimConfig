@@ -1,8 +1,8 @@
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 local rest = require('rest-nvim')
-local wdirs = require('workingdirs')
-local dirsList = require('dirslist')
+local wdirs = require('directories')
+local dirsList = require('directories/list')
 
 --- Helper function binding keymaps only for a specific buffer
 ---

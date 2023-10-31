@@ -1,10 +1,10 @@
 --- Various utilities for working with directories (supports netrw).
-local WorkingDirs = {}
+local Directories = {}
 
 --- Get the current working directory
 ---
 --- @return string path
-WorkingDirs.getCurrentWorkingDirectory = function()
+Directories.getCurrentWorkingDirectory = function()
     return vim.fn.getcwd()
 end
 
@@ -14,7 +14,7 @@ end
 --- nil for some other reason the function will return nil.
 ---
 --- @return string|nil path
-WorkingDirs.getCurrentNetrwDirectory = function()
+Directories.getCurrentNetrwDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
     if (dir == nil) then return nil end
@@ -32,7 +32,7 @@ end
 --- incorrect/nil the function will return nil.
 ---
 --- @return string|nil path
-WorkingDirs.getSelectedDirectory = function()
+Directories.getSelectedDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
     if (dir == nil) then return nil end
@@ -56,7 +56,7 @@ end
 --- nil for some other reason the function will return nil.
 ---
 --- @return string|nil path
-WorkingDirs.getPreviousDirectory = function()
+Directories.getPreviousDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
     if (dir == nil) then return nil end
@@ -74,25 +74,25 @@ end
 ---
 --- @param path string
 --- @return boolean success
-WorkingDirs.changeCurrentWorkingDirectory = function(path)
+Directories.changeCurrentWorkingDirectory = function(path)
      local success = pcall(vim.loop.chdir, path)
      return success
 end
 
 --- Opens netrw in the current working directory.
-WorkingDirs.openNetrwCurrentWorkingDirectory = function()
-    vim.cmd(string.format(':Ntree %s', WorkingDirs.getCurrentWorkingDirectory()))
+Directories.openNetrwCurrentWorkingDirectory = function()
+    vim.cmd(string.format(':Ntree %s', Directories.getCurrentWorkingDirectory()))
 end
 
 --- Opens the specified directory using netrw.
 --- @param path string
-WorkingDirs.openNetrwDirectory = function(path)
+Directories.openNetrwDirectory = function(path)
     vim.cmd(string.format(':Ntree %s', path))
 end
 
 -- TODO: Add path parameter
 --- Shows the list of available directories and opens the chosen one using netrw
-WorkingDirs.prettyChangeDirectory = function(directroyList)
+Directories.prettyChangeDirectory = function(directoryList)
     local formattedDirList = ''
     local intInput
     local path
@@ -122,12 +122,12 @@ WorkingDirs.prettyChangeDirectory = function(directroyList)
     -- Whether to change the working directory
     vim.ui.input({ prompt = 'Whether to change to working directory (y/N): ' }, function(input)
         if not (input == 'N') then
-            WorkingDirs.changeCurrentWorkingDirectory(path)
+            Directories.changeCurrentWorkingDirectory(path)
         end
     end)
 
     -- Open directory
-    WorkingDirs.openNetrwDirectory(path)
+    Directories.openNetrwDirectory(path)
 end
 
-return WorkingDirs
+return Directories

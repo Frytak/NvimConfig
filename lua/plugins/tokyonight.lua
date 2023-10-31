@@ -42,6 +42,8 @@ return {
 
                 -- Sidebars
                 colors.bg_sidebar = colorado.bg.depth1
+
+                colors.error = colorado.fg.error
             end,
 
             --- You can override specific highlights to use other groups or a hex color
@@ -51,6 +53,37 @@ return {
             on_highlights = function(highlights, colors)
                 highlights.LineNr = {
                     fg = colors.comment
+                }
+
+
+                -- Lualine mode colors
+                highlights.lualine_a_terminal = {
+                    bg = '#ff0000',
+                    fg = '#ff0000',
+                    bold = true
+                }
+
+                highlights.lualine_a_normal = {
+                    bg = '#ff0000',
+                    fg = '#ff0000',
+                }
+
+                highlights.lualine_a_replace = {
+                    bg = '#ff0000',
+                    fg = '#ff0000',
+                    bold = true
+                }
+
+                highlights.lualine_a_command = {
+                    bg = '#ff0000',
+                    fg = '#ff0000',
+                    bold = true
+                }
+
+                highlights.lualine_a_visual = {
+                    bg = '#ff0000',
+                    fg = '#ff0000',
+                    bold = true
                 }
             end,
         })
