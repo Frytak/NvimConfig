@@ -2,6 +2,7 @@ local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
 local rest = require('rest-nvim')
 local wdirs = require('workingdirs')
+local dirsList = require('dirslist')
 
 --- Helper function binding keymaps only for a specific buffer
 ---
@@ -13,11 +14,6 @@ local function buffer_bind(pattern, callback)
         callback = callback,
     })
 end
-
--- TESTS
-vim.keymap.set('n', '<Leader>t', function()
-    print("Current netrw directory: " .. wdirs.getCurrentNetrwDirectory())
-end)
 
 -- ====================
 -- Standard Vim keymaps
@@ -154,7 +150,12 @@ vim.keymap.set('n', '<Leader>f', '<cmd>FZF<Enter>')
     vim.keymap.set('n', '<Leader>w<S-j>', '<C-w>+')
 
 -- Navigation (custom)
-    vim.keymap.set('n', '<Leader>d', function() wdirs.prettyChangeDirectory() end)
+    vim.keymap.set('n', '<Leader>d', function()
+        local success, error = pcall(wdirs.prettyChangeDirectory, dirsList)
+        if (not success) then
+            vim.print(string.format('Error: %s', error))
+        end
+    end)
 
 
 

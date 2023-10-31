@@ -1,5 +1,3 @@
-local directoryList = require('dirslist')
-
 --- Various utilities for working with directories (supports netrw).
 local WorkingDirs = {}
 
@@ -19,7 +17,7 @@ end
 WorkingDirs.getCurrentNetrwDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
-    if (dir) then return nil end
+    if (dir == nil) then return nil end
 
     -- Change all '\' to '/' for consistency
     dir = string.gsub(dir, '\\', '/')
@@ -37,11 +35,11 @@ end
 WorkingDirs.getSelectedDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
-    if (dir) then return nil end
+    if (dir == nil) then return nil end
 
     -- Get the file name under the cursor
     local file = vim.fn.expand('<cfile>')
-    if (file) then return nil end
+    if (file == nil) then return nil end
 
     -- Concatenate them to get the full path
     dir = dir .. '/' .. file
@@ -61,7 +59,7 @@ end
 WorkingDirs.getPreviousDirectory = function()
     -- Get the current directory in netrw
     local dir = vim.b.netrw_curdir
-    if (dir) then return nil end
+    if (dir == nil) then return nil end
 
     -- Change all '\' to '/' for consistency
     dir = string.gsub(dir, '\\', '/')
@@ -94,10 +92,14 @@ end
 
 -- TODO: Add path parameter
 --- Shows the list of available directories and opens the chosen one using netrw
-WorkingDirs.prettyChangeDirectory = function()
+WorkingDirs.prettyChangeDirectory = function(directroyList)
     local formattedDirList = ''
     local intInput
     local path
+
+    if (directoryList == nil) then
+        error('Directory list is empty.')
+    end
 
     -- Print the list of the available directories
     for i, v in ipairs(directoryList) do
