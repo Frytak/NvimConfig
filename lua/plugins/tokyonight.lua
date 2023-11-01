@@ -37,9 +37,6 @@ return {
                 colors.bg = colorado.bg.depth2
                 colors.comment = colorado.fg.comment
 
-                -- Status line
-                colors.bg_statusline = colorado.bg.depth1
-
                 -- Sidebars
                 colors.bg_sidebar = colorado.bg.depth1
 
@@ -52,39 +49,19 @@ return {
             ---@param colors ColorScheme
             on_highlights = function(highlights, colors)
                 highlights.LineNr = {
-                    fg = colors.comment
+                    fg = colorado.fg.comment
                 }
 
+                -- Diagnostics
+                highlights.DiagnosticError = { fg = colorado.vim.diagnostics_colors.error }
+                highlights.DiagnosticHint = { fg = colorado.vim.diagnostics_colors.hint }
+                highlights.DiagnosticInfo = { fg = colorado.vim.diagnostics_colors.info }
+                highlights.DiagnosticWarn = { fg = colorado.vim.diagnostics_colors.warn }
 
-                -- Lualine mode colors
-                highlights.lualine_a_terminal = {
-                    bg = '#ff0000',
-                    fg = '#ff0000',
-                    bold = true
-                }
+                -- Git
+                highlights.diffAdded = { fg = "#0000ff" }
+                highlights.diffLine = { fg = "#0000ff" }
 
-                highlights.lualine_a_normal = {
-                    bg = '#ff0000',
-                    fg = '#ff0000',
-                }
-
-                highlights.lualine_a_replace = {
-                    bg = '#ff0000',
-                    fg = '#ff0000',
-                    bold = true
-                }
-
-                highlights.lualine_a_command = {
-                    bg = '#ff0000',
-                    fg = '#ff0000',
-                    bold = true
-                }
-
-                highlights.lualine_a_visual = {
-                    bg = '#ff0000',
-                    fg = '#ff0000',
-                    bold = true
-                }
             end,
         })
     end
