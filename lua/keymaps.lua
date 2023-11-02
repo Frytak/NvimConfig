@@ -15,6 +15,9 @@ local function buffer_bind(pattern, callback)
     })
 end
 
+-- diagnostic
+vim.keymap.set('n', '<Leader>t', vim.diagnostic.open_float)
+
 -- ====================
 -- Standard Vim keymaps
 -- ====================
@@ -32,9 +35,9 @@ vim.keymap.set('v', '<Leader>y', '"+y')
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
 
 -- Switch between normal and relative line numbers
-vim.keymap.set('n', '<Leader>ls', function() vim.wo.relativenumber = (not vim.wo.relativenumber) end)
-vim.keymap.set('n', '<Leader>lr', function() vim.wo.relativenumber = true end)
-vim.keymap.set('n', '<Leader>ln', function() vim.wo.relativenumber = false end)
+vim.keymap.set('n', '<Leader>1s', function() vim.wo.relativenumber = (not vim.wo.relativenumber) end)
+vim.keymap.set('n', '<Leader>1r', function() vim.wo.relativenumber = true end)
+vim.keymap.set('n', '<Leader>1n', function() vim.wo.relativenumber = false end)
 
 
 

@@ -10,17 +10,17 @@ return {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function ()
-        local colors = require('colorscheme')
+        local theme = require('theme')
 
         require('lualine').setup({
             options = {
                 theme = {
-                    normal = colors.lualine.mode.normal,
-                    visual = colors.lualine.mode.visual,
-                    insert = colors.lualine.mode.insert,
-                    replace = colors.lualine.mode.replace,
-                    terminal = colors.lualine.mode.terminal,
-                    command = colors.lualine.mode.terminal,
+                    normal = theme.lualine.mode.normal,
+                    visual = theme.lualine.mode.visual,
+                    insert = theme.lualine.mode.insert,
+                    replace = theme.lualine.mode.replace,
+                    terminal = theme.lualine.mode.terminal,
+                    command = theme.lualine.mode.terminal,
                 },
 
                 component_separators = {
@@ -48,7 +48,22 @@ return {
                     },
                     'diagnostics'
                 },
-                lualine_x = { 'diff' },
+                lualine_x = {
+                    {
+                        'diff',
+                        colored = true,
+                        diff_color = {
+                            added = { fg = theme.diff.added.fg },
+                            modified = { fg = theme.diff.modified.fg },
+                            removed = { fg = theme.diff.removed.fg },
+                        },
+                        symbols = {
+                            added = theme.diff.added.icon,
+                            modified = theme.diff.added.icon,
+                            removed = theme.diff.added.icon
+                        },
+                    }
+                },
                 lualine_y = { 'filetype' },
                 lualine_z = { 'progress', 'location' },
             }
