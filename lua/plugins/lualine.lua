@@ -10,7 +10,7 @@ return {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
     config = function ()
-        local theme = require('theme')
+        local theme = require('theme/settings')
 
         require('lualine').setup({
             options = {

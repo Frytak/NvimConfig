@@ -1,5 +1,5 @@
 local lsp_zero = require('lsp-zero')
-local theme = require('theme')
+local theme = require('theme/settings')
 
 lsp_zero.set_sign_icons({
   error = theme.diagnostic.error.icon,

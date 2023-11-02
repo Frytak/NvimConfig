@@ -1,6 +1,5 @@
 local lsp_zero = require('lsp-zero')
 local cmp = require('cmp')
-local rest = require('rest-nvim')
 local wdirs = require('directories')
 local dirsList = require('directories/list')
 
@@ -179,10 +178,3 @@ lsp_zero.on_attach(function(client, bufnr)
         })
     })
 end)
-
-
-
--- ====
--- Rest
--- ====
-vim.keymap.set('n', '<Leader>r', function() rest.run() end)

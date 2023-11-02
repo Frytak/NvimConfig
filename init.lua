@@ -45,8 +45,6 @@ require("lazy").setup("plugins")
 
 
 -- Set colorshceme
-vim.cmd("colorscheme tokyonight")
-
 local cmp = require('cmp')
 cmp.setup({
     formatting = {
@@ -57,6 +55,9 @@ cmp.setup({
       end
     }
 })
+
+-- Set theme
+require('theme')
 
 -- Keymaps
 require('keymaps')
