@@ -72,46 +72,65 @@ Theme.diff = {
     },
 }
 
+local chars = '#72A22D'
+local keywords = '#1DD197'
+local numbers = '#CC822D'
+local types = '#9756DE'
+local identifier = '#6395B3'
+
 Theme.types = {
-    Constant = { fg = '#CC700A' }, -- Any constant
+    String = { fg = chars }, -- String constant: "this is a string"
+    Character = { fg = chars }, -- Character constant: 'c', '\n'
 
-    String = { fg = '#72A22D' }, -- String constant: "this is a string"
-    Character = { fg = '#72A22D' }, -- Character constant: 'c', '\n'
+    -- Basic values and operators
+    Number = { fg = numbers }, -- Number constant: 234, 0xff
+    Boolean = { fg = numbers }, -- Boolean constant: TRUE, false
+    Float = { fg = numbers }, -- Floating point constant: 2.3e10
+    Operator = { fg = numbers }, -- "sizeof", "+", "*", etc.
 
-    Number = { fg = '#BF6F14' }, -- Number constant: 234, 0xff
-    Boolean = { fg = '#BF6F14' }, -- Boolean constant: TRUE, false
-    Float = { fg = '#BF6F14' }, -- Floating point constant: 2.3e10
+    -- Names
+    Identifier = { fg = identifier }, -- Variable name
+    Function = { fg = keywords }, -- Function name (also: methods for classes)
 
-    Comment = { fg = '#666666' }, -- Comments such as this text!
+    -- Keywords
+    Statement = { fg = keywords }, -- Any statement
+    Conditional = { fg = keywords }, -- if, then, else, endif, switch, etc.
+    Repeat = { fg = keywords }, -- for, do, while, etc.
+    Label = { fg = keywords }, -- case, default, etc.
+    Keyword = { fg = keywords }, -- Any other keyword
+    Exception = { fg = keywords }, -- try, catch, throw
+    StorageClass = { fg = keywords }, -- static, register, volatile, etc.
+    Typedef = { fg = keywords }, -- A typedef
+    Special = { fg = keywords }, -- Special symbol
 
-    Identifier = { fg = '#FF0000' }, -- Variable name
-    Function = { fg = '#FF0000' }, -- Vunction name (also: methods for classes)
-    Statement = { fg = '#FF0000' }, -- Any statement
-    Conditional = { fg = '#FF0000' }, -- if, then, else, endif, switch, etc.
-    Repeat = { fg = '#FF0000' }, -- for, do, while, etc.
-    Label = { fg = '#FF0000' }, -- case, default, etc.
-    Operator = { fg = '#FF0000' }, -- "sizeof", "+", "*", etc.
-    Keyword = { fg = '#FF0000' }, -- Any other keyword
-    Exception = { fg = '#FF0000' }, -- try, catch, throw
+    -- Types
+    Type = { fg = types }, -- int, long, char, etc.
+    Structure = { fg = types }, -- struct, union, enum etc.
+    Constant = { fg = types }, -- Any constant
+
+
+    -- Preprocessors
     PreProc = { fg = '#FF0000' }, -- Generic Preprocessor
     Include = { fg = '#FF0000' }, -- Preprocessor #include
     Define = { fg = '#FF0000' }, -- Preprocessor #define
     Macro = { fg = '#FF0000' }, -- Same as Define
     PreCondit = { fg = '#FF0000' }, -- Preprocessor #if, #else, #endif, etc.
-    Type = { fg = '#FF0000' }, -- int, long, char, etc.
-    StorageClass = { fg = '#FF0000' }, -- static, register, volatile, etc.
-    Structure = { fg = '#FF0000' }, -- struct, union, enum, etc.
-    Typedef = { fg = '#FF0000' }, -- A typedef
-    Special = { fg = '#FF0000' }, -- Special symbol
+
     SpecialChar = { fg = '#FF0000' }, -- Special character in a constant
     Tag = { fg = '#FF0000' }, -- You can use CTRL-] on this
     Delimiter = { fg = '#FF0000' }, -- Character that needs attention
-    SpecialComment = { fg = '#FF0000' }, -- Special things inside a comment
+    SpecialComment = { fg = '#E755E4' }, -- Special things inside a comment
     Debug = { fg = '#FF0000' }, -- Debugging statements
     Underlined = { fg = '#FF0000' }, -- Text that stands out, HTML links
+
     Ignore = { fg = '#FF0000' }, -- left blank, hidden hl-Ignore
-    Error = { fg = '#FF0000' }, -- Erroneous construct
-    Todo = { fg = '#FF0000' }, -- TODO FIXME and XXX
+
+    Error = { fg = Theme.diagnostic.error.fg }, -- Erroneous construct
+
+    Comment = { fg = '#666666' }, -- Comments such as this text!
+
+    -- FIXME
+    Todo = { bg = Theme.bg.depth4, fg = Theme.fg.text }, -- TODO FIXME and XXX
 }
 
 Theme.lualine = {}
@@ -123,9 +142,9 @@ Theme.lualine.normal_fg = Theme.fg.text
 
 Theme.lualine.mode = {
     normal = {
-        a = { bg = '#3f80a3', fg = Theme.lualine.mode_fg, cterm=nil, ctermfg=nil, ctermbg=nil },
-        b = { bg = '#30556b', fg = Theme.lualine.mode_fg, cterm=nil, ctermfg=nil, ctermbg=nil },
-        c = { bg = Theme.lualine.bg, fg = Theme.lualine.normal_fg, cterm=nil, ctermfg=nil, ctermbg=nil },
+        a = { bg = '#3f80a3', fg = Theme.lualine.mode_fg },
+        b = { bg = '#30556b', fg = Theme.lualine.mode_fg },
+        c = { bg = Theme.lualine.bg, fg = Theme.lualine.normal_fg },
     },
 
     visual = {
