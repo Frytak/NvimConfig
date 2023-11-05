@@ -1,17 +1,86 @@
+-- TODO: Add main background color variable
+
 local Theme = {
     --- Basic background colors (lower depth means darker)
     bg = {
         depth0 = '#060606',
-        depth1 = '#0B0B0B',
-        depth2 = '#121212', -- Main bg color
-        depth3 = '#181818',
-        depth4 = '#1B1B1B',
+        depth1 = '#0D0D0D',
+        depth2 = '#141414', -- Main bg color
+        depth3 = '#1B1B1B',
+        depth4 = '#222222',
+        depth5 = '#282828',
+        depth6 = '#2F2F2F',
+        depth7 = '#363636',
     },
 
     fg = {
         text = '#A7B7B7',
         comment = '#666666',
     },
+}
+
+Theme.netrw = {
+    -- Menu
+    directory = { fg = '#ff0000' },
+    file = { fg = '#00ff00' },
+    slash = { fg = '#ff0000' },
+
+    -- Info
+    comment = { fg = '#ff0000' },
+    list = { fg = '#ff0000' },
+    command = { fg = '#ff0000' },
+    separator = { fg = '#ff0000' },
+    note = { fg = '#ff0000' },
+    topic = { fg = '#ff0000' },
+    version = { fg = '#ff0000' },
+}
+
+Theme.matchParen = {
+    bg = Theme.bg.depth7
+}
+
+Theme.selection = {
+    bg = Theme.bg.depth5
+}
+
+Theme.leftGutter = {
+    endOfBuffer = {
+        bg = Theme.bg.depth2,
+        fg = Theme.bg.depth2,
+    },
+
+    signColumn = {
+        bg = Theme.bg.depth2,
+        fg = Theme.bg.depth2,
+    }
+}
+
+Theme.search = {
+    all = {
+        bg = "#29223a",
+        fg = "#3086FF",
+    },
+    current = {
+        bg = "#6851bd",
+        fg = "#000000",
+    },
+}
+
+Theme.tabs = {
+    --- If true, `selected` will be ignored, instead lualine section colors will be used
+    modeBasedColor = true,
+
+    normal = {
+        bg = Theme.bg.depth0,
+        fg = Theme.fg.text,
+    },
+
+    selected = {
+        bg = Theme.bg.depth0,
+        fg = Theme.fg.text,
+    },
+
+    fill = Theme.bg.depth1,
 }
 
 --- Backgrounds are derived from foreground colors using https://colordesigner.io/gradient-generator

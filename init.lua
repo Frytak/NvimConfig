@@ -28,9 +28,6 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set shiftwidth=4")
 
--- Set Python3 path
-vim.cmd("let g:python3_host_prog = 'C:\\Users\\fryta\\AppData\\Local\\Programs\\Python\\Python310\\python.exe'")
-
 
 
 -- ============
@@ -44,7 +41,6 @@ require("lazy").setup("plugins")
 
 
 
--- Set colorshceme
 local cmp = require('cmp')
 cmp.setup({
     formatting = {
@@ -57,7 +53,8 @@ cmp.setup({
 })
 
 -- Set theme
-require('theme')
+local settings = require('theme/settings')
+require('theme'):setup(settings)
 
 -- Keymaps
 require('keymaps')
