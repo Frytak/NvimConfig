@@ -19,22 +19,6 @@ local Theme = {
     },
 }
 
-Theme.netrw = {
-    -- Menu
-    directory = { fg = '#ff0000' },
-    file = { fg = '#00ff00' },
-    slash = { fg = '#ff0000' },
-
-    -- Info
-    comment = { fg = '#ff0000' },
-    list = { fg = '#ff0000' },
-    command = { fg = '#ff0000' },
-    separator = { fg = '#ff0000' },
-    note = { fg = '#ff0000' },
-    topic = { fg = '#ff0000' },
-    version = { fg = '#ff0000' },
-}
-
 Theme.matchParen = {
     bg = Theme.bg.depth7
 }
@@ -111,11 +95,11 @@ Theme.diagnostic = {
     },
 
     floating_window = {
-        bg = Theme.bg.depth2,
+        bg = Theme.bg.depth1,
         fg = Theme.fg.text,
 
         border = {
-            bg = Theme.bg.depth2,
+            bg = Theme.bg.depth1,
             fg = Theme.fg.comment,
         },
     }
@@ -238,6 +222,34 @@ Theme.lualine.mode = {
         a = { bg = '#DBB221', fg = Theme.lualine.mode_fg },
         b = { bg = '#8F7420', fg = Theme.lualine.mode_fg },
         c = { bg = Theme.lualine.bg, fg = Theme.lualine.normal_fg },
+    },
+}
+
+Theme.netrw = {
+    -- Menu
+    directory = { fg = Theme.lualine.mode.normal.a.bg },
+    file = { fg = Theme.fg.text },
+    slash = { fg = Theme.lualine.mode.normal.b.bg },
+
+    -- Info
+    comment = { fg = '#888888' },
+    list = { fg = Theme.lualine.mode.normal.b.bg },
+    command = { fg = Theme.lualine.mode.replace.a.bg },
+    separator = { fg = Theme.lualine.mode.normal.b.bg },
+    note = { fg = Theme.fg.comment },
+    topic = { fg = Theme.lualine.mode.terminal.a.bg },
+    version = { fg = Theme.lualine.mode.insert.a.bg },
+}
+
+Theme.completionMenu = {
+    all = {
+        bg = Theme.bg.depth1,
+        fg = Theme.fg.text,
+    },
+
+    selected = {
+        bg = Theme.lualine.mode.insert.a.bg,
+        fg = Theme.lualine.mode.insert.a.fg,
     },
 }
 

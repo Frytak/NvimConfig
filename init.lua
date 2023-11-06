@@ -53,8 +53,7 @@ cmp.setup({
 })
 
 -- Set theme
-local settings = require('theme/settings')
-require('theme'):setup(settings)
+require('theme'):setup('theme/settings')
 
 -- Keymaps
 require('keymaps')

@@ -47,6 +47,11 @@ Theme.setNormal = function(self)
     vim.api.nvim_set_hl(0, 'Normal', { bg = self.settings.bg.depth2, fg = self.settings.fg.text })
 end
 
+Theme.setPMenu = function(self)
+    vim.api.nvim_set_hl(0, 'Pmenu', self.settings.completionMenu.all)
+    vim.api.nvim_set_hl(0, 'PmenuSel', self.settings.completionMenu.selected)
+end
+
 Theme.setNetrw = function(self)
     vim.api.nvim_set_hl(0, 'netrwDir', self.settings.netrw.directory)
     vim.api.nvim_set_hl(0, 'netrwPlain', self.settings.netrw.file)
@@ -136,6 +141,7 @@ Theme.reloadAll = function(self)
     self.enableTrueColors()
 
     self:setNormal()
+    self:setPMenu()
     self:setNetrw()
     self:setMatchParen()
     self:setSelection()
@@ -152,7 +158,14 @@ end
 
 Theme.setup = function(self, settings)
     vim.cmd('aug frytak_theme_tabs')
-    self.settings = settings
+    self.settings = require(settings)
+
+--    vim.api.nvim_create_user_command('ReloadTheme', function()
+--        local theme = require('theme')
+--        print(require('theme/settings').bg.depth2)
+--        theme:reloadAll()
+--    end, {bang = false})
+
     self:reloadAll()
 end
 
