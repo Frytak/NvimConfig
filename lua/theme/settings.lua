@@ -239,6 +239,14 @@ Theme.netrw = {
     note = { fg = Theme.fg.comment },
     topic = { fg = Theme.lualine.mode.terminal.a.bg },
     version = { fg = Theme.lualine.mode.insert.a.bg },
+    treeBar = { fg = Theme.lualine.mode.insert.a.bg },
+
+    sizeAndDate = { fg = Theme.fg.comment },
+    time = { fg = Theme.fg.comment },
+    timeSeparator = { fg = Theme.fg.comment },
+    dateSeparator = { fg = Theme.fg.comment },
+
+    lineHighlight = Theme.selection
 }
 
 Theme.completionMenu = {

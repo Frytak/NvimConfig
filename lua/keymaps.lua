@@ -74,7 +74,7 @@ vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnos
 
         -- Make the current directory the working one
         vim.keymap.set('n', '<S-k>', function()
-            local path = wdirs.getCurrentDirectory()
+            local path = wdirs.getCurrentNetrwDirectory()
             wdirs.changeCurrentWorkingDirectory(path)
         end, {remap = true, buffer = true})
     end)

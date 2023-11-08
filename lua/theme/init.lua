@@ -66,6 +66,14 @@ Theme.setNetrw = function(self)
     vim.api.nvim_set_hl(0, 'netrwCmdNote', self.settings.netrw.note)
     vim.api.nvim_set_hl(0, 'netrwQHTopic', self.settings.netrw.topic)
     vim.api.nvim_set_hl(0, 'netrwVersion', self.settings.netrw.version)
+    vim.api.nvim_set_hl(0, 'netrwTreeBar', self.settings.netrw.treeBar)
+
+    vim.api.nvim_set_hl(0, 'netrwSizeDate', self.settings.netrw.sizeAndDate)
+    vim.api.nvim_set_hl(0, 'netrwTime', self.settings.netrw.time)
+    vim.api.nvim_set_hl(0, 'netrwDateSep', self.settings.netrw.dateSeparator)
+    vim.api.nvim_set_hl(0, 'netrwTimeSep', self.settings.netrw.timeSeparator)
+
+    vim.api.nvim_set_hl(0, 'CursorLine', self.settings.netrw.lineHighlight)
 end
 
 Theme.setMatchParen = function(self)
