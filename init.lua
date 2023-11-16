@@ -1,3 +1,6 @@
+-- Set theme
+require('theme'):setup('theme/settings')
+
 -- Setup 'lazy' plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -51,9 +54,6 @@ cmp.setup({
       end
     }
 })
-
--- Set theme
-require('theme'):setup('theme/settings')
 
 -- Keymaps
 require('keymaps')

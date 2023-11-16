@@ -125,11 +125,11 @@ Theme.diff = {
     },
 }
 
-local chars = '#72A22D'
-local keywords = '#1DD197'
-local numbers = '#CC822D'
-local types = '#9756DE'
-local identifier = '#6395B3'
+local chars = '#82D241'
+local keywords = '#00FF9D'
+local numbers = '#FF9500'
+local types = '#A53ACF'
+local identifier = '#EFB93A'
 
 Theme.types = {
     String = { fg = chars }, -- String constant: "this is a string"
@@ -144,6 +144,7 @@ Theme.types = {
     -- Names
     Identifier = { fg = identifier }, -- Variable name
     Function = { fg = keywords }, -- Function name (also: methods for classes)
+    Macro = { fg = keywords }, -- Same as Define
 
     -- Keywords
     Statement = { fg = keywords }, -- Any statement
@@ -166,12 +167,11 @@ Theme.types = {
     PreProc = { fg = '#FF0000' }, -- Generic Preprocessor
     Include = { fg = '#FF0000' }, -- Preprocessor #include
     Define = { fg = '#FF0000' }, -- Preprocessor #define
-    Macro = { fg = '#FF0000' }, -- Same as Define
     PreCondit = { fg = '#FF0000' }, -- Preprocessor #if, #else, #endif, etc.
 
     SpecialChar = { fg = '#FF0000' }, -- Special character in a constant
     Tag = { fg = '#FF0000' }, -- You can use CTRL-] on this
-    Delimiter = { fg = '#FF0000' }, -- Character that needs attention
+    Delimiter = { fg = '#FF9500' }, -- Character that needs attention
     SpecialComment = { fg = '#E755E4' }, -- Special things inside a comment
     Debug = { fg = '#FF0000' }, -- Debugging statements
     Underlined = { fg = '#FF0000' }, -- Text that stands out, HTML links
@@ -188,6 +188,7 @@ Theme.types = {
 
 Theme.lualine = {}
 Theme.lualine.bg = Theme.bg.depth0
+Theme.lualine.bgNC = Theme.bg.depth1
 
 Theme.lualine.mode_fg = '#000000'
 Theme.lualine.normal_fg = Theme.fg.text
@@ -233,7 +234,7 @@ Theme.netrw = {
 
     -- Info
     comment = { fg = '#888888' },
-    list = { fg = Theme.lualine.mode.normal.b.bg },
+    list = { fg = Theme.lualine.mode.normal.a.bg },
     command = { fg = Theme.lualine.mode.replace.a.bg },
     separator = { fg = Theme.lualine.mode.normal.b.bg },
     note = { fg = Theme.fg.comment },

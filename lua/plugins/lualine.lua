@@ -9,6 +9,7 @@ end
 return {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    dependencies = { 'linrongbin16/lsp-progress.nvim' },
     config = function ()
         local theme = require('theme/settings')
 
@@ -46,9 +47,10 @@ return {
                             return string.format('Found: %s', component)
                         end
                     },
-                    'diagnostics'
+                    'diagnostics',
                 },
                 lualine_x = {
+                    require('lsp-progress').progress,
                     {
                         'diff',
                         colored = true,
@@ -64,9 +66,17 @@ return {
                         },
                     }
                 },
-                lualine_y = { 'filetype' },
+                lualine_y = { { 'filetype', colored = false } },
                 lualine_z = { 'progress', 'location' },
             }
+        })
+
+        -- listen lsp-progress event and refresh lualine
+        vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+        vim.api.nvim_create_autocmd("User", {
+            group = "lualine_augroup",
+            pattern = "LspProgressStatusUpdated",
+            callback = require("lualine").refresh,
         })
     end
 }

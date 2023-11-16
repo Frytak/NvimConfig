@@ -117,7 +117,7 @@ end
 
 Theme.setStatusLine = function(self)
     vim.api.nvim_set_hl(0, 'StatusLine', { bg = self.settings.lualine.bg, fg = self.settings.lualine.normal_fg })
-    vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = self.settings.lualine.bg, fg = self.settings.lualine.normal_fg })
+    vim.api.nvim_set_hl(0, 'StatusLineNC', { bg = self.settings.lualine.bgNC, fg = self.settings.lualine.normal_fg })
 end
 
 Theme.setDiagnostics = function(self)
