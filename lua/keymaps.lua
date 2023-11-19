@@ -44,11 +44,23 @@ vim.keymap.set('n', '<Leader>1n', function() vim.wo.relativenumber = false end)
 -- LSP
 vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnostics() end)
 
+-- Navigation (lir)
+    -- Open lir
+    vim.keymap.set('n', '<Leader><Leader>', function()
+        local currentDir = vim.fn.expand("%:p:h")
+        if (currentDir == '') then
+            wdirs.lir.openDirectory(".")
+        else
+            wdirs.lir.openDirectory(currentDir)
+        end
+
+    end)
+
 
 
 -- Navigation (netrw)
     -- Open netrw
-    vim.keymap.set('n', '<Leader><Leader>', function() vim.cmd('Explore') end)
+    --vim.keymap.set('n', '<Leader><Leader>', function() vim.cmd('Explore') end)
 
     -- netrw specific keymaps
     buffer_bind('netrw', function()
@@ -60,21 +72,21 @@ vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnos
 
         -- Go into directory and make it the working one
         vim.keymap.set('n', '<S-l>', function()
-            local path = wdirs.getSelectedDirectory()
+            local path = wdirs.netrw.getSelectedDirectory()
             wdirs.changeCurrentWorkingDirectory(path)
-            wdirs.openNetrwCurrentWorkingDirectory()
+            wdirs.netrw.openCurrentWorkingDirectory()
         end, {remap = true, buffer = true})
 
         -- Go up one directory and make it the working one
         vim.keymap.set('n', '<S-h>', function()
-            local path = wdirs.getPreviousDirectory()
+            local path = wdirs.netrw.getPreviousDirectory()
             wdirs.changeCurrentWorkingDirectory(path)
-            wdirs.openNetrwCurrentWorkingDirectory()
+            wdirs.netrw.openCurrentWorkingDirectory()
         end, {remap = true, buffer = true})
 
         -- Make the current directory the working one
         vim.keymap.set('n', '<S-k>', function()
-            local path = wdirs.getCurrentNetrwDirectory()
+            local path = wdirs.netrw.getCurrentDirectory()
             wdirs.changeCurrentWorkingDirectory(path)
         end, {remap = true, buffer = true})
     end)
