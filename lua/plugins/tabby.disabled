@@ -1,0 +1,6 @@
+return {
+    'nanozuki/tabby.nvim',
+    cofig = function()
+        require('tabby.tabline').setup()
+    end,
+}

@@ -76,6 +76,11 @@ Theme.setNetrw = function(self)
     vim.api.nvim_set_hl(0, 'CursorLine', self.settings.netrw.lineHighlight)
 end
 
+Theme.setLir = function(self)
+    vim.api.nvim_set_hl(0, 'LirDir', self.settings.lir.directory)
+    vim.api.nvim_set_hl(0, 'LirSymLink', self.settings.lir.symLink)
+end
+
 Theme.setMatchParen = function(self)
     vim.api.nvim_set_hl(0, 'MatchParen', self.settings.matchParen)
 end
@@ -151,6 +156,7 @@ Theme.reloadAll = function(self)
     self:setNormal()
     self:setPMenu()
     self:setNetrw()
+    self:setLir()
     self:setMatchParen()
     self:setSelection()
     self:setLeftGutter()

@@ -85,6 +85,45 @@ end
 Directories.lir.openDirectory = function(path)
     vim.cmd("edit " .. path)
 end
+--
+--- Shows the list of available directories and opens the chosen one using netrw
+Directories.lir.prettyChangeDirectory = function(directoryList)
+    local formattedDirList = ''
+    local intInput
+    local path
+
+    if (directoryList == nil) then
+        error('Directory list is empty.')
+    end
+
+    -- Print the list of the available directories
+    for i, v in ipairs(directoryList) do
+        formattedDirList = formattedDirList .. string.format('  %i: %s\n', i, v.name)
+    end
+
+    -- Take the directory input
+    vim.ui.input({ prompt = string.format('%sChoose from the available directories: ', formattedDirList) }, function(input)
+        intInput = tonumber(input);
+
+        -- If invalid directory input, return
+        if (intInput == nil) then return end
+
+        path = directoryList[intInput].path
+    end)
+
+    -- If invalid directory input, return
+    if (intInput == nil) then return end
+
+    -- Whether to change the working directory
+    vim.ui.input({ prompt = 'Whether to change to working directory (y/N): ' }, function(input)
+        if not (input == 'N') then
+            Directories.changeCurrentWorkingDirectory(path)
+        end
+    end)
+
+    -- Open directory
+    Directories.lir.openDirectory(path)
+end
 
 Directories.netrw = {
     --- Gets the current directory.

@@ -84,7 +84,7 @@ return {
                   }
                 end,
             },
-            hide_cursor = true
+            hide_cursor = false
         })
     end,
 }

@@ -20,7 +20,7 @@ return {
         arg = "leetcode.nvim",
 
         ---@type lc.lang
-        lang = "rust",
+        lang = "typescript",
 
         ---@type lc.sql
         sql = "mysql",

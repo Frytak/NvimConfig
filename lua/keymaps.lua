@@ -165,7 +165,7 @@ vim.keymap.set('n', '<Leader>f', '<cmd>FZF<Enter>')
 
 -- Navigation (custom)
     vim.keymap.set('n', '<Leader>d', function()
-        local success, error = pcall(wdirs.prettyChangeDirectory, dirsList)
+        local success, error = pcall(wdirs.lir.prettyChangeDirectory, dirsList)
         if (not success) then
             vim.print(string.format('Error: %s', error))
         end

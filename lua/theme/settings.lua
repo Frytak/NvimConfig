@@ -226,6 +226,11 @@ Theme.lualine.mode = {
     },
 }
 
+Theme.lir = {
+    directory = { fg = Theme.lualine.mode.normal.a.bg },
+    symLink = { fg = Theme.lualine.mode.normal.b.bg },
+}
+
 Theme.netrw = {
     -- Menu
     directory = { fg = Theme.lualine.mode.normal.a.bg },
