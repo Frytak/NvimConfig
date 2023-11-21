@@ -38,6 +38,8 @@ vim.keymap.set('n', '<Leader>1s', function() vim.wo.relativenumber = (not vim.wo
 vim.keymap.set('n', '<Leader>1r', function() vim.wo.relativenumber = true end)
 vim.keymap.set('n', '<Leader>1n', function() vim.wo.relativenumber = false end)
 
+-- Rest
+vim.keymap.set('n', '<Leader>r', '<Plug>RestNvim')
 
 
 
