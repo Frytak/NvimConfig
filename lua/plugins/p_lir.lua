@@ -33,9 +33,8 @@ return {
 
                 -- Make the current directory the working one
                 ['<S-k>'] = function()
-                    local path = wdirs.netrw.getPreviousDirectory()
+                    local path = wdirs.lir.getCurrentDirectory()
                     wdirs.changeCurrentWorkingDirectory(path)
-                    wdirs.netrw.openCurrentWorkingDirectory()
                 end,
 
                 ['l'] = actions.edit,

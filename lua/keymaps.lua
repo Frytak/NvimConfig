@@ -67,30 +67,30 @@ vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnos
     -- netrw specific keymaps
     buffer_bind('netrw', function()
         -- Go out of directory
-        vim.keymap.set('n', 'h', '-', {remap = true, buffer = true})
+        --vim.keymap.set('n', 'h', '-', {remap = true, buffer = true})
 
         -- Go into directory
-        vim.keymap.set('n', 'l', '<Enter>', {remap = true, buffer = true})
+        --vim.keymap.set('n', 'l', '<Enter>', {remap = true, buffer = true})
 
         -- Go into directory and make it the working one
-        vim.keymap.set('n', '<S-l>', function()
-            local path = wdirs.netrw.getSelectedDirectory()
-            wdirs.changeCurrentWorkingDirectory(path)
-            wdirs.netrw.openCurrentWorkingDirectory()
-        end, {remap = true, buffer = true})
+        --vim.keymap.set('n', '<S-l>', function()
+        --    local path = wdirs.netrw.getSelectedDirectory()
+        --    wdirs.changeCurrentWorkingDirectory(path)
+        --    wdirs.netrw.openCurrentWorkingDirectory()
+        --end, {remap = true, buffer = true})
 
         -- Go up one directory and make it the working one
-        vim.keymap.set('n', '<S-h>', function()
-            local path = wdirs.netrw.getPreviousDirectory()
-            wdirs.changeCurrentWorkingDirectory(path)
-            wdirs.netrw.openCurrentWorkingDirectory()
-        end, {remap = true, buffer = true})
+        --vim.keymap.set('n', '<S-h>', function()
+        --    local path = wdirs.netrw.getPreviousDirectory()
+        --    wdirs.changeCurrentWorkingDirectory(path)
+        --    wdirs.netrw.openCurrentWorkingDirectory()
+        --end, {remap = true, buffer = true})
 
         -- Make the current directory the working one
-        vim.keymap.set('n', '<S-k>', function()
-            local path = wdirs.netrw.getCurrentDirectory()
-            wdirs.changeCurrentWorkingDirectory(path)
-        end, {remap = true, buffer = true})
+        --vim.keymap.set('n', '<S-k>', function()
+        --    local path = wdirs.netrw.getCurrentDirectory()
+        --    wdirs.changeCurrentWorkingDirectory(path)
+        --end, {remap = true, buffer = true})
     end)
 
 -- Navigation (fzf)
