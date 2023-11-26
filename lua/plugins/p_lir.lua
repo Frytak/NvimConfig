@@ -83,7 +83,7 @@ return {
                   }
                 end,
             },
-            hide_cursor = false
+            hide_cursor = true
         })
     end,
 }
