@@ -31,6 +31,11 @@ vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set shiftwidth=4")
 
+-- Set word wrap
+vim.cmd("set breakindent")
+vim.cmd("set formatoptions=l")
+vim.cmd("set lbr")
+
 
 
 -- ============
