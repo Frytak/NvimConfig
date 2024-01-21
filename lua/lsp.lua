@@ -19,6 +19,7 @@ require('mason-lspconfig').setup({
         'tsserver',
         'html',
         'jsonls',
+        'java_language_server',
     },
     handlers = {
         lsp_zero.default_setup,

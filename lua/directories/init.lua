@@ -21,14 +21,14 @@ Directories.changeCurrentWorkingDirectory = function(path)
 end
 
 --- Makes the path consistent.
----   Change all '\' to '/' for
----   Delete the '/' at the end
+---   Change all '/' to '\' for consistency (also lir or plenary will break without it...)
+---   Delete the '\' at the end
 ---
 --- @param path string
 --- @return string path
 Directories.standardizePath = function(path)
-    local standardizePath, replaced = path:gsub('\\', '/')
-    if (standardizePath:sub(standardizePath:len(), standardizePath:len()) == '/') then
+    local standardizePath, replaced = path:gsub('/', '\\')
+    if (standardizePath:sub(standardizePath:len(), standardizePath:len()) == '\\') then
         standardizePath = standardizePath:sub(1, standardizePath:len()-1)
     end
 
@@ -84,6 +84,16 @@ end
 ---@param path string
 Directories.lir.openDirectory = function(path)
     vim.cmd("edit " .. path)
+
+    --local context = lir.get_context()
+    --if (not context) then return nil end
+
+    --print("Okej")
+
+    --context.dir = path
+    --actions.cd()
+
+    --print(context.dir)
 end
 --
 --- Shows the list of available directories and opens the chosen one using netrw
