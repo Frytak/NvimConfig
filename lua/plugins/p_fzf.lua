@@ -1,3 +1,4 @@
 return {
-    'junegunn/fzf'
+    'junegunn/fzf',
+    name = 'fzf',
 }

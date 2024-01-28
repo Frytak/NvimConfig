@@ -8,8 +8,9 @@ end
 
 return {
     'nvim-lualine/lualine.nvim',
-    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
-    dependencies = { 'linrongbin16/lsp-progress.nvim' },
+    name = 'lualine',
+    --requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+    dependencies = { 'lsp_progress' },
     config = function ()
         local theme = require('theme/settings')
 

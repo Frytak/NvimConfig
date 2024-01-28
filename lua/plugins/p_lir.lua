@@ -1,5 +1,6 @@
 return {
     'tamago324/lir.nvim',
+    name = 'lir',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
         -- Lir specific

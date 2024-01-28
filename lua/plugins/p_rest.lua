@@ -1,12 +1,15 @@
 return {
-    "rest-nvim/rest.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'rest-nvim/rest.nvim',
+    name = 'rest',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-        require("rest-nvim").setup({
+        require('rest-nvim').setup({
             -- Open request results in a horizontal split
-            result_split_horizontal = true,
-            -- Keep the http file buffer above|left when split horizontal|vertical
-            result_split_in_place = false,
+            result_split_horizontal = false,
+            -- Keep the http file buffer above|right when split horizontal|vertical
+            result_split_in_place = true,
+            -- stay in current windows (.http file) or change to results window (default)
+            stay_in_current_window_after_split = false,
             -- Skip SSL verification, useful for unknown certificates
             skip_ssl_verification = false,
             -- Encode URL before making request
@@ -14,7 +17,7 @@ return {
             -- Highlight request on run
             highlight = {
                 enabled = true,
-                timeout = 150,
+                timeout = 400,
             },
             result = {
                 -- toggle showing URL, HTTP info, headers at top the of result window
@@ -24,12 +27,15 @@ return {
                 show_curl_command = true,
                 show_http_info = true,
                 show_headers = true,
+                -- table of curl `--write-out` variables or false if disabled
+                -- for more granular control see Statistics Spec
+                show_statistics = false,
                 -- executables or functions for formatting response body [optional]
                 -- set them to false if you want to disable them
                 formatters = {
-                    json = "jq",
+                    json = 'jq',
                     html = function(body)
-                        return vim.fn.system({"tidy", "-i", "-q", "-"}, body)
+                        return vim.fn.system({'tidy', '-i', '-q', '-'}, body)
                     end
                 },
             },
@@ -38,6 +44,10 @@ return {
             env_file = '.env',
             custom_dynamic_variables = {},
             yank_dry_run = true,
+            search_back = true,
         })
+
+        -- Keymaps
+        vim.keymap.set('n', '<Leader>r', '<Plug>RestNvim')
     end
 }

@@ -1,5 +1,3 @@
-local lsp_zero = require('lsp-zero')
-local cmp = require('cmp')
 local wdirs = require('directories')
 local dirsList = require('directories/list')
 
@@ -16,10 +14,6 @@ end
 
 -- diagnostic
 vim.keymap.set('n', '<Leader>t', vim.diagnostic.open_float)
-
--- ====================
--- Standard Vim keymaps
--- ====================
 
 -- Start JLS
 vim.keymap.set('n', '<Leader>sj', function()
@@ -48,14 +42,6 @@ vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
 vim.keymap.set('n', '<Leader>1s', function() vim.wo.relativenumber = (not vim.wo.relativenumber) end)
 vim.keymap.set('n', '<Leader>1r', function() vim.wo.relativenumber = true end)
 vim.keymap.set('n', '<Leader>1n', function() vim.wo.relativenumber = false end)
-
--- Rest
-vim.keymap.set('n', '<Leader>r', '<Plug>RestNvim')
-
-
-
--- LSP
-vim.keymap.set('n', '<Leader>e', function() vim.lsp.diagnostic.show_line_diagnostics() end)
 
 -- Navigation (lir)
     -- Open lir
@@ -184,22 +170,18 @@ vim.keymap.set('n', '<Leader>f', '<cmd>FZF<Enter>')
         end
     end)
 
-
-
--- ============
 -- Autocomplete
--- ============
-lsp_zero.on_attach(function(client, bufnr)
-    lsp_zero.default_keymaps({buffer = bufnr})
-
-    cmp.setup({
-        mapping = cmp.mapping.preset.insert({
-            ['<C-l>'] = cmp.mapping.confirm({select = false}),
-            ['<C-h>'] = cmp.mapping.abort(),
-            ['<C-k>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
-            ['<C-j>'] = cmp.mapping.select_next_item({behavior = 'select'}),
-            ['<S-C-j>'] = cmp.mapping.scroll_docs(1),
-            ['<S-C-k>'] = cmp.mapping.scroll_docs(-1),
-        })
-    })
-end)
+-- lsp_zero.on_attach(function(client, bufnr)
+--     lsp_zero.default_keymaps({buffer = bufnr})
+-- 
+--     cmp.setup({
+--         mapping = cmp.mapping.preset.insert({
+--             ['<C-l>'] = cmp.mapping.confirm({select = false}),
+--             ['<C-h>'] = cmp.mapping.abort(),
+--             ['<C-k>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+--             ['<C-j>'] = cmp.mapping.select_next_item({behavior = 'select'}),
+--             ['<S-C-j>'] = cmp.mapping.scroll_docs(1),
+--             ['<S-C-k>'] = cmp.mapping.scroll_docs(-1),
+--         })
+--     })
+-- end)
