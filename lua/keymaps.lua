@@ -21,6 +21,17 @@ vim.keymap.set('n', '<Leader>t', vim.diagnostic.open_float)
 -- Standard Vim keymaps
 -- ====================
 
+-- Start JLS
+vim.keymap.set('n', '<Leader>sj', function()
+    local config = {
+        cmd = {'C:\\Users\\fryta\\Pulpit\\desk\\Important\\ForOtherstoWork\\jdt-language-server-1.32.0-202401230545\\bin\\jdtls.bat'},
+        root_dir = vim.fs.dirname(vim.fs.find({'.git', 'mvnw'}, { upward = true })[1]),
+    }
+
+    require('jdtls').start_or_attach(config)
+end)
+
+
 -- Copy/Paste into '+' buffer
 vim.keymap.set('n', '<Leader>p', '"+p')
 vim.keymap.set('n', '<Leader>P', '"+P')

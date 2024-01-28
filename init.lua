@@ -1,5 +1,6 @@
 -- Set theme
 require('theme'):setup('theme/settings')
+vim.g.python3_host_prog = 'C:\\Program Files\\Python39\\python.exe'
 
 -- Setup 'lazy' plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
