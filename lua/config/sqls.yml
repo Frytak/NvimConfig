@@ -3,4 +3,4 @@ lowercaseKeywords: false
 connections:
   - alias: test
     driver: sqlite3
-    dataSourceName: C:/Users/fryta/Pulpit/desk/Important/Programming Projects/Millionaires/server/millionaires.db
+    dataSourceName: C:/Users/Frytak/Desktop/desk/Important/Programming Projects/Millionaires/server/millionaires.db
