@@ -1,6 +1,5 @@
 return {
     'linrongbin16/lsp-progress.nvim',
-    name = 'lsp_progress',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
         local max_message_size = 40

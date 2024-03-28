@@ -1,7 +1,6 @@
 return {
     'hrsh7th/nvim-cmp',
-    name = 'cmp',
-    dependencies = { 'lua_snip' },
+    dependencies = { 'LuaSnip' },
     event = 'InsertEnter',
     config = function()
         local lsp_zero = require('lsp-zero')

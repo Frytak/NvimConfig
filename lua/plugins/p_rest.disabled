@@ -1,0 +1,69 @@
+return {
+    "rest-nvim/rest.nvim",
+    name = "rest",
+    ft = "http",
+    dependencies = {
+        "luarocks.nvim",
+        "nvim-treesitter",
+    },
+    config = function()
+        require("rest-nvim").setup({
+            client = "curl",
+            encode_url = true,
+            skip_ssl_verification = false,
+
+            highlight = {
+                enable = true,
+                timeout = 750,
+            },
+
+            result = {
+                split = {
+                    horizontal = false,
+                    in_place = false,
+                },
+                behavior = {
+                    decode_url = true,
+                    show_info = {
+                        url = true,
+                        headers = true,
+                        http_info = true,
+                        curl_command = true,
+                    },
+                    statistics = {
+                        enable = true,
+                        ---@see https://curl.se/libcurl/c/curl_easy_getinfo.html
+                        stats = {
+                            { "total_time", title = "Time taken:" },
+                            { "size_download_t", title = "Download size:" },
+                        },
+                    },
+                    formatters = {
+                        json = "jq",
+                        html = function(body)
+                            if vim.fn.executable("tidy") == 0 then
+                                return body, { found = false, name = "tidy" }
+                            end
+
+                            local fmt_body = vim.fn.system({
+                                "tidy",
+                                "-i",
+                                "-q",
+                                "--tidy-mark",      "no",
+                                "--show-body-only", "auto",
+                                "--show-errors",    "0",
+                                "--show-warnings",  "0",
+                                "-",
+                            }, body):gsub("\n$", "")
+
+                            return fmt_body, { found = true, name = "tidy" }
+                        end,
+                    },
+                },
+            }
+        })
+
+        --- Set the keymap
+        vim.keymap.set('n', '<Leader>r', '<cmd>Rest run<Enter>')
+    end,
+}

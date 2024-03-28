@@ -4,7 +4,7 @@ return {
 
     {
         'VonHeikemen/lsp-zero.nvim',
-        dependencies = { 'cmp' },
+        dependencies = { 'nvim-cmp' },
         branch = 'v3.x',
         init = function()
             -- Disable automatic setup

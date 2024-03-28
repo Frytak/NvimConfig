@@ -1,6 +1,5 @@
 return {
     'nvim-treesitter/nvim-treesitter',
-    name = 'treesitter',
     version = false, -- last release is way too old and doesn't work on Windows
     build = ':TSUpdate',
     dependencies = {
@@ -23,7 +22,6 @@ return {
             'javascript',
             'jsdoc',
             'json',
-            'jsonc',
             'lua',
             'luadoc',
             'markdown',

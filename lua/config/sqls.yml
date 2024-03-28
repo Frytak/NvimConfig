@@ -1,6 +1,18 @@
 # Set to true to use lowercase keywords instead of uppercase.
 lowercaseKeywords: false
 connections:
-  - alias: test
+  - alias: Millionaires
     driver: sqlite3
     dataSourceName: C:/Users/Frytak/Desktop/desk/Important/Programming Projects/Millionaires/server/millionaires.db
+  - alias: MillionairesRun1
+    driver: sqlite3
+    dataSourceName: C:/Users/Frytak/Desktop/desk/Important/Programming Projects/Millionaires/real_data/millionaires.db
+  - alias: MillionairesRun2
+    driver: sqlite3
+    dataSourceName: C:/Users/Frytak/Desktop/desk/Important/Programming Projects/Millionaires/real_data/millionaires1.db
+  - alias: MillionairesRun3
+    driver: sqlite3
+    dataSourceName: C:/Users/Frytak/Desktop/desk/Important/Programming Projects/Millionaires/real_data/millionaires2.db
+  - alias: Deposito
+    driver: sqlite3
+    dataSourceName: C:/Users/Frytak/Desktop/desk/Important/Programming Projects/Homework/Deposito/deposito/deposito.db

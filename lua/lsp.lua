@@ -11,14 +11,17 @@ lsp_zero.set_sign_icons({
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'lua_ls',
-        'rust_analyzer',
-        'cssls',
-        'clangd',
-        'cssmodules_ls',
-        'tsserver',
+        -- Webdev
         'html',
         'jsonls',
+        'cssls',
+        'cssmodules_ls',
+        'tsserver',
+
+        -- Others
+        'clangd',
+        'lua_ls',
+        'rust_analyzer',
     },
     handlers = {
         lsp_zero.default_setup,
