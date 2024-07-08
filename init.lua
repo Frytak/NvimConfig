@@ -18,6 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 
 
 
+
 -- Set <Leader> to <Space> earasing all <Space> bindings
 vim.keymap.set('n', ' ', '<Nop>', { silent = true, remap = false })
 vim.g.mapleader = ' ';
